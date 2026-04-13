@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surface Scheme Lab</title>
+    <meta
+      name="description"
+      content="A static marketing prototype for validating OKLCH surface, content, and fill tokens across neutral, brand, and alt schemes."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="script.js" defer></script>
+  </head>
+  <body class="scheme-neutral surface-default">
+    <div class="site-frame" id="top">
+      <header class="site-header">
+        <div class="site-header-inner">
+          <div class="header-leading">
+            <button
+              class="menu-button"
+              type="button"
+              aria-controls="site-nav"
+              aria-expanded="false"
+              data-panel-toggle="nav"
+            >
+              <span class="menu-button-icon menu-button-icon-open" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M3 5h14" />
+                  <path d="M3 10h14" />
+                  <path d="M3 15h14" />
+                </svg>
+              </span>
+              <span class="menu-button-icon menu-button-icon-close" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M5 5l10 10" />
+                  <path d="M15 5L5 15" />
+                </svg>
+              </span>
+              <span class="menu-button-label-open">Menu</span>
+              <span class="menu-button-label-close">Close</span>
+            </button>
+
+            <div class="site-brand">
+              <a class="wordmark" href="#top" data-page-link="home">Surface Scheme Lab</a>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <label class="identity-picker">
+              <span class="toolbar-label">Identity</span>
+              <select class="identity-select" aria-label="Identity" data-identity-select></select>
+            </label>
+
+            <div class="toggle-group" role="group" aria-label="Appearance">
+              <button
+                class="toggle is-active"
+                type="button"
+                aria-pressed="true"
+                data-theme-button="light"
+              >
+                Light
+              </button>
+              <button
+                class="toggle"
+                type="button"
+                aria-pressed="false"
+                data-theme-button="dark"
+              >
+                Dark
+              </button>
+            </div>
+            <button
+              class="ghost-button"
+              type="button"
+              aria-controls="control-drawer"
+              aria-expanded="false"
+              data-panel-toggle="controls"
+            >
+              Tune surfaces
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="panel-scrim" data-nav-close></div>
+
+      <aside
+        id="site-nav"
+        class="site-panel site-nav scheme-neutral surface-subtle"
+        aria-hidden="true"
+      >
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Prototype pages</p>
+            <h2>Browse the exploration space</h2>
+          </div>
+        </div>
+
+        <p class="panel-copy">
+          Keep the landing page focused on the primary surface demo while adding
+          adjacent pages for preset comparison and future edge-case scenarios.
+        </p>
+
+        <nav class="nav-stack" aria-label="Prototype pages">
+          <button class="nav-link is-active" type="button" data-page-link="home">
+            <span class="nav-link-title">Home</span>
+            <span class="nav-link-copy">Primary landing page for the current semantic surface demo.</span>
+          </button>
+
+          <button class="nav-link" type="button" data-page-link="identity-gallery">
+            <span class="nav-link-title">Identity Gallery</span>
+            <span class="nav-link-copy">Compare preset identities and load both light and dark configurations.</span>
+          </button>
+        </nav>
+
+        <div class="token-readout scheme-neutral surface-raised">
+          <p class="mini-label">Next additions</p>
+          <p>
+            Future scenario pages can plug into this menu without crowding the
+            landing page. Keep stripe and edge-case studies isolated until the
+            semantic model is stable enough to compare cleanly across modes.
+          </p>
+        </div>
+      </aside>
+
+      <aside
+        id="control-drawer"
+        class="site-panel control-drawer scheme-neutral surface-subtle"
+        aria-hidden="true"
+      >
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Live token tuning</p>
+            <h2>Adjust each semantic intention</h2>
+          </div>
+          <button class="ghost-button ghost-button-small controls-mobile-close" type="button" data-controls-close>
+            Close
+          </button>
+        </div>
+
+        <p class="panel-copy">
+          Tune hue, chroma, baseline lightness, and spread for each intention.
+          Light and dark edits stay separate while the page preview updates in
+          real time.
+        </p>
+
+        <div class="mode-summary">
+          <p class="mini-label">Editing appearance</p>
+          <p class="mode-chip" data-active-mode-label>Light mode</p>
+        </div>
+
+        <div class="range-mode-group" role="group" aria-label="Slider range mode">
+          <p class="mini-label">Range mode</p>
+          <div class="toggle-group toggle-group-compact">
+            <button
+              class="toggle is-active"
+              type="button"
+              aria-pressed="true"
+              data-range-mode-button="standard"
+            >
+              Standard
+            </button>
+            <button
+              class="toggle"
+              type="button"
+              aria-pressed="false"
+              data-range-mode-button="advanced"
+            >
+              Advanced
+            </button>
+          </div>
+          <p class="slider-hint" data-range-mode-note>
+            Standard mode keeps the most practical tuning range visible.
+          </p>
+        </div>
+
+        <div class="control-groups" data-control-groups></div>
+
+        <div class="token-readout scheme-neutral surface-raised">
+          <p class="mini-label">Preset state</p>
+          <p data-preset-status>
+            Loading the identity preserves both appearance configs. Changes to
+            any slider switch the active header label to Custom.
+          </p>
+        </div>
+
+        <button class="ghost-button drawer-reset" type="button" data-reset-mode>
+          Reset current mode
+        </button>
+      </aside>
+
+      <main class="page-shell">
+        <div class="page-view is-active" data-page-view="home">
+        <section class="band scheme-neutral surface-default">
+          <div class="band-inner intro-inner">
+            <div class="intro-copy">
+              <p class="eyebrow">Color-first surfaces</p>
+              <h1>
+                Validate multi-theme depth systems before borders and shadows
+                enter the picture.
+              </h1>
+              <p class="lede">
+                This mockup focuses on surface layering first, then expands into
+                content hierarchy, fills, buttons, and badges that can safely
+                live inside those surfaces. The page itself is neutral default,
+                so each band has to earn its contrast honestly.
+              </p>
+
+              <div class="hero-actions">
+                <a class="button button-solid scheme-brand" href="#token-stack">
+                  Explore the system
+                </a>
+                <a class="button button-subtle scheme-neutral" href="#rules-table">
+                  Read the usage rules
+                </a>
+              </div>
+            </div>
+
+            <div class="rule-column">
+              <article class="mini-panel scheme-neutral surface-subtle">
+                <p class="mini-label">Layering rules</p>
+                <ul class="rule-list">
+                  <li><code>default</code> is the base and should not stack on itself.</li>
+                  <li><code>default</code> can contain <code>subtle</code>, or <code>raised</code> for emphasis.</li>
+                  <li><code>default</code> on <code>sunken</code> is a preferred combination.</li>
+                  <li><code>subtle</code> should not sit directly on <code>sunken</code>.</li>
+                </ul>
+              </article>
+
+              <article class="mini-panel scheme-neutral surface-raised">
+                <p class="mini-label">Evaluation focus</p>
+                <p>
+                  The goal is not to prove every combination possible. It is to
+                  find the combinations that still feel legible and intentional
+                  when color alone carries the hierarchy.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="token-stack" class="band scheme-neutral surface-default">
+          <div class="band-inner">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Token stack</p>
+                <h2>The four-level model across all current intentions</h2>
+              </div>
+              <p class="section-copy">
+                Each card is intentionally subtle because the surrounding band
+                already occupies default. The question is whether the four
+                families still separate cleanly without borrowing contrast from
+                a lower-level parent.
+              </p>
+            </div>
+
+            <div class="stack-grid">
+              <article class="stack-card scheme-neutral surface-subtle">
+                <div class="stack-head">
+                  <h3>Neutral</h3>
+                  <p class="stack-note">Baseline UI surfaces and layout structure.</p>
+                </div>
+                <div class="swatch-stack">
+                  <div class="swatch scheme-neutral surface-raised">Raised</div>
+                  <div class="swatch scheme-neutral surface-default">Default</div>
+                  <div class="swatch scheme-neutral surface-subtle">Subtle</div>
+                  <div class="swatch scheme-neutral surface-sunken">Sunken</div>
+                </div>
+              </article>
+
+              <article class="stack-card scheme-brand surface-subtle">
+                <div class="stack-head">
+                  <h3>Brand</h3>
+                  <p class="stack-note">Contained emphasis for storytelling and product framing.</p>
+                </div>
+                <div class="swatch-stack">
+                  <div class="swatch scheme-brand surface-raised">Raised</div>
+                  <div class="swatch scheme-brand surface-default">Default</div>
+                  <div class="swatch scheme-brand surface-subtle">Subtle</div>
+                  <div class="swatch scheme-brand surface-sunken">Sunken</div>
+                </div>
+              </article>
+
+              <article class="stack-card scheme-neutral-alt surface-subtle">
+                <div class="stack-head">
+                  <h3>Neutral Alt</h3>
+                  <p class="stack-note">Knockout editorial moments and contrast bands.</p>
+                </div>
+                <div class="swatch-stack">
+                  <div class="swatch scheme-neutral-alt surface-raised">Raised</div>
+                  <div class="swatch scheme-neutral-alt surface-default">Default</div>
+                  <div class="swatch scheme-neutral-alt surface-subtle">Subtle</div>
+                  <div class="swatch scheme-neutral-alt surface-sunken">Sunken</div>
+                </div>
+              </article>
+
+              <article class="stack-card scheme-brand-alt surface-subtle">
+                <div class="stack-head">
+                  <h3>Brand Alt</h3>
+                  <p class="stack-note">Louder marketing emphasis and spotlight space.</p>
+                </div>
+                <div class="swatch-stack">
+                  <div class="swatch scheme-brand-alt surface-raised">Raised</div>
+                  <div class="swatch scheme-brand-alt surface-default">Default</div>
+                  <div class="swatch scheme-brand-alt surface-subtle">Subtle</div>
+                  <div class="swatch scheme-brand-alt surface-sunken">Sunken</div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="band scheme-neutral surface-sunken">
+          <div class="band-inner">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Default On Sunken</p>
+                <h2>Shared parent surfaces create the clearest depth cues</h2>
+              </div>
+              <p class="section-copy">
+                This stripe stays structural. One wide default card gets a
+                subtle inset, then two smaller companions test how brand and
+                brand-alt defaults behave when they share the same sunken field.
+              </p>
+            </div>
+
+            <div class="feature-grid">
+              <article class="card card-wide scheme-neutral surface-default">
+                <p class="mini-label">Neutral default on sunken</p>
+                <h3>Main content with one inset</h3>
+                <p>
+                  This remains the strongest pattern in the system. The parent
+                  field does the structural work, the default card anchors the
+                  content, and one subtle inset adds secondary grouping without
+                  fragmenting the layout.
+                </p>
+                <div class="nested-panel scheme-neutral surface-subtle">
+                  <p class="mini-label">Subtle inset</p>
+                  <p>
+                    Good for metadata, helper guidance, or secondary summaries
+                    that should stay inside the content well instead of becoming
+                    a new sibling card.
+                  </p>
+                  <div class="button-row">
+                    <a class="button button-subtle scheme-neutral" href="#component-safety">
+                      Quiet action
+                    </a>
+                    <a class="button button-subtle scheme-neutral" href="#rules-table">
+                      Default intensity
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card scheme-brand surface-default">
+                <p class="mini-label">Brand default on sunken</p>
+                <h3>Soft brand companion</h3>
+                <p>
+                  A branded companion card works better when it borrows the same
+                  structural parent rather than trying to separate itself from a
+                  neutral default band on hue alone.
+                </p>
+                <a class="button-link scheme-brand" href="#component-safety">
+                  View fills and buttons
+                </a>
+              </article>
+
+              <article class="card scheme-brand-alt surface-default">
+                <p class="mini-label">Brand-alt default on sunken</p>
+                <h3>Message card without nested surfaces</h3>
+                <p>
+                  This is where brand-alt feels useful: concise, high-interest
+                  communication with simple actions and no complex internal
+                  chrome.
+                </p>
+                <div class="badge-row">
+                  <span class="badge badge-medium scheme-brand-alt">Spotlight</span>
+                  <span class="badge badge-subtle scheme-brand-alt">Simple CTA</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="band scheme-neutral surface-default" id="component-safety">
+          <div class="band-inner band-stack">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Content And Components</p>
+                <h2>Hierarchy, fills, and actions inside safe default contexts</h2>
+              </div>
+              <p class="section-copy">
+                This full band stays on neutral default, so every contained
+                panel is subtle or raised. The point is to formalize how content
+                and component intensity can scale without leaning on borders or
+                separate page stripes.
+              </p>
+            </div>
+
+            <div class="hierarchy-grid">
+              <article class="card scheme-neutral surface-raised">
+                <p class="mini-label">Neutral content tiers</p>
+                <h3>Raised is still safe for the faint tier</h3>
+                <p class="tone-default">
+                  Default copy should carry the main reading load without
+                  becoming heavy.
+                </p>
+                <p class="tone-subtle">
+                  Subtle is for supporting context, navigation labels, and
+                  secondary explanation.
+                </p>
+                <p class="tone-faint">
+                  Faint is reserved for timestamps, helper metadata, and
+                  low-emphasis status where contrast still holds.
+                </p>
+                <p class="tone-prominent">
+                  Prominent is for the strongest message inside the panel.
+                </p>
+              </article>
+
+              <article class="card scheme-neutral surface-raised">
+                <p class="mini-label">Raised support</p>
+                <h3>Faint also works on raised</h3>
+                <p class="tone-default">
+                  Raised is useful for contained emphasis when it still lives
+                  inside a default section.
+                </p>
+                <p class="tone-subtle">
+                  That makes it a good home for helper explanation, timing
+                  cues, and small review scaffolding that still needs a touch
+                  more lift.
+                </p>
+                <p class="tone-faint">
+                  The faint tier stays readable here, but it should not move to
+                  sunken where the contrast budget gets thinner.
+                </p>
+                <div class="badge-row">
+                  <span class="badge badge-subtle scheme-neutral">Meta</span>
+                  <span class="badge badge-medium scheme-neutral">Review</span>
+                </div>
+              </article>
+
+              <article class="card scheme-brand surface-subtle">
+                <p class="mini-label">Brand hierarchy</p>
+                <h3>Compatible chroma, quieter voice</h3>
+                <p class="tone-default">
+                  Brand can stay soft enough for long-form product explanation.
+                </p>
+                <p class="tone-subtle">
+                  Supporting labels can still carry brand character without
+                  turning the panel into a CTA.
+                </p>
+                <p class="tone-subtle">
+                  It works best when the copy does the persuasion and the
+                  strongest action still lives elsewhere in the band.
+                </p>
+                <div class="button-row">
+                  <a class="button button-subtle scheme-neutral" href="#rules-table">
+                    Quiet default action
+                  </a>
+                  <a class="button button-text scheme-brand" href="#brand-stripe">
+                    Brand context
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <article class="banner-card scheme-brand surface-subtle">
+              <div class="banner-copy">
+                <p class="mini-label">Contained banner</p>
+                <h3>Brand subtle can break the rhythm without becoming a page stripe</h3>
+                <p>
+                  This is the kind of contained interruption that keeps multiple
+                  default bands from feeling flat. It adds editorial contrast,
+                  but the page-level depth still belongs to default.
+                </p>
+              </div>
+              <div class="banner-actions">
+                <a class="button button-solid scheme-brand" href="#brand-stripe">
+                  See the brand stripe
+                </a>
+                <a class="button button-text scheme-brand" href="#footer-close">
+                  Compare the footer close
+                </a>
+              </div>
+            </article>
+
+            <div class="component-grid component-split-grid">
+              <article class="card attached-card scheme-neutral surface-subtle">
+                <div class="card-body">
+                  <p class="mini-label">Badges</p>
+                  <h3>Default and brand badges inside a default band</h3>
+                  <p>
+                    The main body holds the default-context variants. Brand
+                    badges can live here too because the parent band remains
+                    neutral and the fills carry their own hierarchy.
+                  </p>
+                  <div class="component-demo">
+                    <p class="demo-label">Default variants</p>
+                    <div class="badge-row">
+                      <span class="badge badge-subtle scheme-neutral">Neutral subtle</span>
+                      <span class="badge badge-medium scheme-neutral">Neutral medium</span>
+                      <span class="badge badge-prominent scheme-neutral">Neutral prominent</span>
+                    </div>
+                    <div class="badge-row">
+                      <span class="badge badge-subtle scheme-brand">Brand subtle</span>
+                      <span class="badge badge-medium scheme-brand">Brand medium</span>
+                      <span class="badge badge-prominent scheme-brand">Brand prominent</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer component-footer scheme-neutral-alt surface-default">
+                  <div class="footer-stack">
+                    <p class="mini-label">Alt variants</p>
+                    <div class="badge-row">
+                      <span class="badge badge-subtle scheme-neutral-alt">Neutral-alt subtle</span>
+                      <span class="badge badge-medium scheme-neutral-alt">Neutral-alt medium</span>
+                      <span class="badge badge-prominent scheme-neutral-alt">Neutral-alt prominent</span>
+                    </div>
+                    <div class="badge-row">
+                      <span class="badge badge-subtle scheme-brand-alt">Brand-alt subtle</span>
+                      <span class="badge badge-medium scheme-brand-alt">Brand-alt medium</span>
+                      <span class="badge badge-prominent scheme-brand-alt">Brand-alt prominent</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card attached-card scheme-neutral surface-subtle">
+                <div class="card-body">
+                  <p class="mini-label">Buttons</p>
+                  <h3>Quiet neutral actions plus one strong brand action</h3>
+                  <p>
+                    The subtle neutral button replaces the old raised-pill
+                    pattern. It stays calm enough for everyday actions, while
+                    the brand solid remains the most intentional control.
+                  </p>
+                  <div class="component-demo">
+                    <p class="demo-label">Default variants</p>
+                    <div class="button-row button-cluster">
+                      <a class="button button-solid scheme-brand" href="#brand-stripe">Brand solid</a>
+                      <a class="button button-solid scheme-neutral" href="#rules-table">Solid neutral</a>
+                      <a class="button button-subtle scheme-neutral" href="#rules-table">Subtle neutral</a>
+                      <a class="button button-outline scheme-neutral" href="#rules-table">Outline</a>
+                      <a class="button button-ghost scheme-neutral" href="#rules-table">Ghost</a>
+                      <a class="button button-text scheme-neutral" href="#rules-table">Text</a>
+                      <a class="button-link scheme-neutral action-link" href="#alt-panels">Default link</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer component-footer scheme-brand-alt surface-default">
+                  <div class="footer-stack">
+                    <p class="mini-label">Alt variants</p>
+                    <div class="button-row button-cluster">
+                      <a class="button button-solid scheme-brand-alt" href="#footer-close">Alt solid</a>
+                      <a class="button button-outline scheme-brand-alt" href="#footer-close">Alt outline</a>
+                      <a class="button button-text scheme-brand-alt" href="#footer-close">Alt text</a>
+                      <a class="button-link scheme-neutral-alt action-link" href="#footer-close">Alt link</a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="brand-stripe" class="band scheme-brand surface-sunken">
+          <div class="band-inner band-stack">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Brand Sunken Stripe</p>
+                <h2>One emphasized structural band is enough to change the pace</h2>
+              </div>
+              <p class="section-copy">
+                This is the only emphasized page stripe before the footer. It
+                stays fully inside the brand family so the section reads as a
+                deliberate shift in tone rather than a competing surface system.
+              </p>
+            </div>
+
+            <div class="wrap-row">
+              <article class="card attached-card scheme-brand surface-default">
+                <div class="card-cap scheme-brand surface-raised">
+                  Product narrative header
+                </div>
+                <div class="card-body">
+                  <h3>Attached headers feel stable inside brand default</h3>
+                  <p>
+                    The raised cap works because the card and the stripe belong
+                    to the same family, and the cap is visibly attached rather
+                    than floating as its own block.
+                  </p>
+                </div>
+              </article>
+
+              <article class="card attached-card scheme-brand surface-default">
+                <div class="card-cap scheme-brand surface-raised">
+                  Migration checklist
+                </div>
+                <div class="card-body">
+                  <h3>Consistent pattern, different content</h3>
+                  <p>
+                    Repeating the same chrome treatment across the row makes the
+                    section feel like a coherent design system test instead of a
+                    gallery of unrelated one-offs.
+                  </p>
+                </div>
+              </article>
+
+              <article class="card attached-card scheme-brand surface-default">
+                <div class="card-cap scheme-brand surface-raised">
+                  Structured proof point
+                </div>
+                <div class="card-body">
+                  <h3>Raised can hold section-level emphasis</h3>
+                  <p>
+                    This is a good place for key outcomes, customer proof, or a
+                    compact announcement that needs a little more lift.
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <div class="wrap-row">
+              <article class="card attached-card wrap-card-wide scheme-brand surface-default">
+                <div class="card-body">
+                  <p class="mini-label">Wide footer treatment</p>
+                  <h3>A larger attached footer can carry additional context</h3>
+                  <p>
+                    Wider cards are a better place for fuller attached footers
+                    because they can support extra explanation, actions, or
+                    summary information without feeling cramped.
+                  </p>
+                </div>
+                <div class="card-footer scheme-brand surface-subtle">
+                  <span>Footer context</span>
+                  <span>Summary details</span>
+                  <a class="button button-text scheme-brand card-footer-link-push" href="#rules-table">
+                    Read rules
+                  </a>
+                </div>
+              </article>
+
+              <article class="card attached-card scheme-brand surface-default">
+                <div class="card-body">
+                  <p class="mini-label">Compact footer</p>
+                  <h3>Secondary actions</h3>
+                  <p>
+                    Compact footers work well for small summaries or paired
+                    actions that should stay attached to the card they support.
+                  </p>
+                </div>
+                <div class="card-footer scheme-brand surface-subtle">
+                  <span>Compare</span>
+                  <span>Share</span>
+                </div>
+              </article>
+
+              <article class="card attached-card scheme-brand surface-default">
+                <div class="card-body">
+                  <p class="mini-label">Compact footer</p>
+                  <h3>Follow-on information</h3>
+                  <p>
+                    This pattern is useful when secondary details need a little
+                    extra structure but should not become a separate panel.
+                  </p>
+                </div>
+                <div class="card-footer scheme-brand surface-subtle">
+                  <span>Version notes</span>
+                  <span>2.1 preview</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="alt-panels" class="band scheme-neutral surface-default">
+          <div class="band-inner band-stack">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Alt Emphasis</p>
+                <h2>Alt schemes work best as contained emphasis, not page scaffolding</h2>
+              </div>
+              <p class="section-copy">
+                This band stays neutral default, then uses alt panels for
+                contained moments of contrast. Buttons, badges, and links stay
+                inside the surfaces that can support them safely.
+              </p>
+            </div>
+
+            <div class="component-grid">
+              <article class="card scheme-neutral-alt surface-subtle">
+                <p class="mini-label">Neutral-alt subtle</p>
+                <h3>Quiet knockout panel</h3>
+                <p>
+                  Useful for quotes, callouts, or editorial guidance that should
+                  feel distinct without becoming the loudest object in the band.
+                </p>
+                <div class="badge-row">
+                  <span class="badge badge-subtle scheme-neutral-alt">Quote</span>
+                  <span class="badge badge-medium scheme-neutral-alt">Context</span>
+                </div>
+                <div class="link-row">
+                  <a class="button-link scheme-neutral-alt" href="#footer-close">Alt link</a>
+                </div>
+              </article>
+
+              <article class="card scheme-brand-alt surface-subtle">
+                <p class="mini-label">Brand-alt subtle</p>
+                <h3>Contained campaign moment</h3>
+                <p>
+                  Brand-alt can carry louder narrative energy, but it stays more
+                  believable when it remains contained inside a neutral band.
+                </p>
+                <div class="button-row">
+                  <a class="button button-solid scheme-brand-alt" href="#footer-close">
+                    Alt solid
+                  </a>
+                  <a class="button button-outline scheme-brand-alt" href="#footer-close">
+                    Alt outline
+                  </a>
+                </div>
+              </article>
+
+              <article class="card scheme-brand-alt surface-default">
+                <p class="mini-label">Brand-alt default</p>
+                <h3>Higher-emphasis panel for simple actions</h3>
+                <p>
+                  This is the strongest contained alt panel on the page. It can
+                  support a prominent fill, but the content stays simple and the
+                  component count stays low.
+                </p>
+                <div class="button-row">
+                  <a class="button button-solid scheme-brand-alt" href="#footer-close">
+                    Prominent fill
+                  </a>
+                  <a class="button button-text scheme-brand-alt" href="#footer-close">
+                    Secondary link
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="rules-table" class="band scheme-neutral surface-sunken">
+          <div class="band-inner">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Usage Rules</p>
+                <h2>One table to formalize depth levels and allowable combinations</h2>
+              </div>
+              <p class="section-copy">
+                In a borderless system, the table itself is a default card and
+                its header and footer become subtle. That keeps the pattern
+                consistent with the same rules the rest of the page follows.
+              </p>
+            </div>
+
+            <article class="table-card scheme-neutral surface-default">
+              <table class="rules-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Level</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Allowed on</th>
+                    <th scope="col">Avoid on</th>
+                    <th scope="col">Typical examples</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sunken</td>
+                    <td>Structural field that frames other surfaces</td>
+                    <td>Page stripes, content rails, footer zones</td>
+                    <td>Inside default cards as a subsurface</td>
+                    <td>Section scaffolding, wide layout bands</td>
+                  </tr>
+                  <tr>
+                    <td>Default</td>
+                    <td>Primary reading and interaction surface</td>
+                    <td>On sunken parents, or as the page base</td>
+                    <td>On other default parents</td>
+                    <td>Main cards, tables, content wells, body canvas</td>
+                  </tr>
+                  <tr>
+                    <td>Subtle</td>
+                    <td>Quiet grouping and secondary regions</td>
+                    <td>Inside default cards, on default bands</td>
+                    <td>Directly on sunken</td>
+                    <td>Insets, grouped metadata, table chrome, side panels</td>
+                  </tr>
+                  <tr>
+                    <td>Raised</td>
+                    <td>Attached emphasis and quiet fills</td>
+                    <td>Inside default cards or subtle cards</td>
+                    <td>As a sibling card beside sunken or subtle without a shared parent</td>
+                    <td>Card headers, quiet action buttons, faint support</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5">
+                      Content hierarchy follows the same logic: faint only on
+                      default or raised, fills always pair with matching on-fill
+                      tokens, and alt families stay contained unless the whole
+                      band is explicitly alt.
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </article>
+          </div>
+        </section>
+
+        <section class="band scheme-neutral surface-default">
+          <div class="band-inner">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Closing Read</p>
+                <h2>The strongest directions are still the most structurally restrained</h2>
+              </div>
+              <p class="section-copy">
+                Before the page closes into an alt footer, this final default
+                band brings the prototype back to the most transferable
+                takeaways: structure comes from depth, emphasis stays contained,
+                and fills should coordinate with their parent surfaces.
+              </p>
+            </div>
+
+            <div class="closing-grid">
+              <article class="card scheme-neutral surface-subtle">
+                <p class="mini-label">Most promising</p>
+                <h3>Default on sunken still leads</h3>
+                <p>
+                  Default on sunken for primary content bands, with subtle
+                  panels nested inside those default cards.
+                </p>
+              </article>
+
+              <article class="card scheme-neutral surface-raised">
+                <p class="mini-label">Still uncertain</p>
+                <h3>Raised needs a shared frame</h3>
+                <p>
+                  Raised as a sibling beside subtle or sunken still feels
+                  fragile without a stronger shared frame of reference.
+                </p>
+              </article>
+
+              <article class="card scheme-brand surface-subtle">
+                <p class="mini-label">Next step</p>
+                <h3>Fills make the component layer believable</h3>
+                <p>
+                  Buttons and badges feel coherent once their fills follow the
+                  same intensity language as the surfaces around them.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <footer id="footer-close" class="band site-footer scheme-neutral-alt surface-default">
+          <div class="band-inner footer-inner">
+            <div class="footer-brand-block">
+              <p class="eyebrow">Surface Scheme Lab</p>
+              <h2>A contained alt footer feels like the right close to the page</h2>
+              <p class="section-copy">
+                Neutral-alt works well as the final frame because it feels
+                distinct, readable, and intentionally separate from the working
+                surfaces above it.
+              </p>
+              <a class="button button-solid scheme-neutral-alt" href="#top">Back to top</a>
+            </div>
+
+            <div class="footer-column">
+              <p class="mini-label">Surface levels</p>
+              <a class="button-link scheme-neutral-alt" href="#token-stack">Token stack</a>
+              <a class="button-link scheme-neutral-alt" href="#rules-table">Usage rules</a>
+              <a class="button-link scheme-neutral-alt" href="#brand-stripe">Brand stripe</a>
+            </div>
+
+            <div class="footer-column">
+              <p class="mini-label">Components</p>
+              <a class="button-link scheme-neutral-alt" href="#component-safety">Hierarchy</a>
+              <a class="button-link scheme-neutral-alt" href="#component-safety">Badges</a>
+              <a class="button-link scheme-neutral-alt" href="#component-safety">Buttons and links</a>
+            </div>
+
+            <div class="footer-column">
+              <p class="mini-label">Takeaways</p>
+              <a class="button-link scheme-neutral-alt" href="#alt-panels">Alt emphasis</a>
+              <a class="button-link scheme-neutral-alt" href="#rules-table">Safe combinations</a>
+              <a class="button-link scheme-neutral-alt" href="#footer-close">Footer close</a>
+            </div>
+          </div>
+        </footer>
+        </div>
+
+        <div class="page-view" data-page-view="identity-gallery" hidden>
+          <section class="band scheme-neutral surface-default">
+            <div class="band-inner band-stack">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Identity Gallery</p>
+                  <h1>Compare saved identities across light and dark</h1>
+                </div>
+                <p class="section-copy">
+                  Use this page to compare preset personalities, inspect their
+                  semantic surface stacks side by side, and quickly reload a
+                  full light and dark configuration into the playground.
+                </p>
+              </div>
+
+              <div class="gallery-layout">
+                <div class="gallery-sidebar">
+                  <article class="gallery-summary scheme-neutral surface-subtle">
+                    <p class="mini-label">Current workspace</p>
+                    <h3 data-gallery-current-label>Studio Default</h3>
+                    <p class="stack-note" data-gallery-current-copy>
+                      The active identity drives both appearances. Adjustments on
+                      either mode remain in memory until you load another preset.
+                    </p>
+                    <div class="gallery-summary-row">
+                      <p class="mini-label">Active appearance</p>
+                      <p class="gallery-summary-value" data-gallery-current-mode>Light</p>
+                    </div>
+                    <div class="gallery-summary-row">
+                      <p class="mini-label">Selection status</p>
+                      <p class="gallery-summary-value" data-gallery-current-status>Preset loaded</p>
+                    </div>
+                  </article>
+
+                  <div class="token-readout gallery-scope-note scheme-neutral surface-raised">
+                    <p class="mini-label">Scope note</p>
+                    <p>
+                      The separate page stripe scenario stays out of the landing
+                      page for now. When it is ready, it should land as another
+                      isolated page in this navigation rather than as a landing
+                      page add-on.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="gallery-content">
+                  <div class="identity-gallery-grid" data-identity-gallery></div>
+                </article>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
